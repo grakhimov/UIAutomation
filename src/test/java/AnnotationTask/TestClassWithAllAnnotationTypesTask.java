@@ -9,7 +9,7 @@ public class TestClassWithAllAnnotationTypesTask {
 
     @BeforeTest
     public void setUpTest() {
-        System.setProperty("webdriver.chrome.driver", "\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
     }
 
     @BeforeClass
