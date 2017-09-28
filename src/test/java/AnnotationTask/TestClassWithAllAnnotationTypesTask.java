@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class TestClassWithAllAnnotationTypesTask {
-    public ChromeDriver driver = new ChromeDriver();
+    private ChromeDriver driver;
 
     @BeforeTest
     public void setUpTest() {
@@ -14,7 +14,7 @@ public class TestClassWithAllAnnotationTypesTask {
 
     @BeforeClass
     public void setUpClass() {
-        ChromeDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
     }
 
     @BeforeSuite
@@ -25,8 +25,7 @@ public class TestClassWithAllAnnotationTypesTask {
     @Test
     public void simpleTest() {
         driver.navigate().to("https://www.epam.com");
-        Assert.assertEquals(driver.getTitle(),
-                "EPAM | Software Product Development Services");
+        Assert.assertEquals(driver.getTitle(), "EPAM | Software Product Development Services");
     }
 
     @AfterMethod

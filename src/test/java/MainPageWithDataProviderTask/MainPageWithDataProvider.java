@@ -2,14 +2,17 @@ package MainPageWithDataProviderTask;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 public class MainPageWithDataProvider {
-    public ChromeDriver chromeDriver = new ChromeDriver();
+    private ChromeDriver chromeDriver = new ChromeDriver();
 
     @BeforeClass
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
     }
 
     @DataProvider(parallel = true)
@@ -23,7 +26,7 @@ public class MainPageWithDataProvider {
         //Open main page
         chromeDriver.navigate().to("https://jdi-framework.github.io/tests");
         chromeDriver.manage().window().maximize();
-        chromeDriver.findElement(By.xpath("//div[@class=\"col-sm-3\"][" + position + "]/div")).getText().contains(proc);
+        chromeDriver.findElement(By.cssSelector((".benefits"))).getText().contains(proc);
     }
 
     @AfterClass

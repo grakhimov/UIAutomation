@@ -4,11 +4,11 @@
     <test name="SmokeTests" >
         <groups>
             <run>
-                <include name="Smoke"></include>
+                <include name="Smoke"/>
             </run>
         </groups>
         <packages>
-            <package name="SmokeAndRegressionTask" />
+            <package name="SmokeAndRegressionTask"/>
         </packages>
     </test>
 </suite>

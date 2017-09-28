@@ -1,15 +1,22 @@
 package SelenideTasks;
 
+import com.codeborne.selenide.Configuration;
+import org.junit.BeforeClass;
 import org.testng.annotations.Test;
 
-import static pages.IndexPage.*;
-
 public class SelenideTask {
+
+    @BeforeClass
+    public static void selenideConfiguration() {
+        Configuration.browser = "CHROME";
+        Configuration.startMaximized = true;
+        Configuration.screenshots = true;
+        Configuration.reportsFolder = "build/reports/tests";
+    }
     @Test
     public void task1() {
-        selenideConfiguration();
-        openIndexPage();
-        login();
-        indexPageElementsAreExist();
+        //openIndexPage();
+        /*login();
+        indexPageElementsAreExist();*/
     }
 }

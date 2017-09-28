@@ -1,19 +1,21 @@
 package pages;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.By;
+import org.openqa.selenium.support.FindBy;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.*;
-import static configs.Constans.*;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.title;
+import static configs.Constans.INDEX_PAGE;
 import static org.junit.Assert.assertEquals;
 
-public class IndexPage {
-    private static SelenideElement loginForm = $(".fa-user");
+public abstract class IndexPage implements SelenideElement {
+
+    @FindBy(css = ".fa-user")
+    String loginForm;
+
+    /*private static SelenideElement loginForm = $(".fa-user");
     private static SelenideElement usernameInput = $("#Login");
     private static SelenideElement passwordInput = $("#Password");
     private static SelenideElement loginButton = $(".fa-sign-in");
@@ -28,37 +30,29 @@ public class IndexPage {
     private static SelenideElement textPracticeOnIndexPage = $(By.xpath("//div[@class=\"col-sm-3\"][1]/div"));
     private static SelenideElement textCustomOnIndexPage = $(By.xpath("//div[@class=\"col-sm-3\"][2]/div"));
     private static SelenideElement textMultiOnIndexPage = $(By.xpath("//div[@class=\"col-sm-3\"][3]/div"));
-    private static SelenideElement textBaseOnIndexPage = $(By.xpath("//div[@class=\"col-sm-3\"][4]/div"));
-
-    @BeforeClass
-    public static void selenideConfiguration() {
-        Configuration.browser = "CHROME";
-        Configuration.startMaximized = true;
-        Configuration.screenshots = true;
-        Configuration.reportsFolder = "build/reports/tests";
-    }
+    private static SelenideElement textBaseOnIndexPage = $(By.xpath("//div[@class=\"col-sm-3\"][4]/div"));*/
 
     @AfterClass
     public static void tearDown() {
     }
 
     @Test
-    public static void openIndexPage() {
+    public void openIndexPage() {
         open("https://jdi-framework.github.io/tests/index.htm");
         assertEquals(title(), INDEX_PAGE);
     }
 
     @Test
-    public static void login() {
-        loginForm.click();
-        usernameInput.sendKeys(USERNAME);
+    public void login() {
+        $(loginForm).click();
+        /*usernameInput.sendKeys(USERNAME);
         passwordInput.sendKeys(PASSWORD);
         loginButton.click();
         logoutButton.isDisplayed();
-        profileDropdown.shouldHave(text(LOGGED_USERNAME));
+        profileDropdown.shouldHave(text(LOGGED_USERNAME));*/
     }
 
-    @Test
+    /*@Test
     public static void indexPageElementsAreExist() {
         titleOfMainTextOnIndexPage.exists();
         mainTextOnIndexPage.exists();
@@ -70,5 +64,5 @@ public class IndexPage {
         textCustomOnIndexPage.exists();
         textMultiOnIndexPage.exists();
         textBaseOnIndexPage.exists();
-    }
+    }*/
 }
