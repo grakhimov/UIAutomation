@@ -1,68 +1,96 @@
 package pages;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.junit.AfterClass;
-import org.junit.Test;
 import org.openqa.selenium.support.FindBy;
 
+import static com.codeborne.selenide.CollectionCondition.exactTexts;
+import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.title;
-import static configs.Constans.INDEX_PAGE;
-import static org.junit.Assert.assertEquals;
+import static configs.Constans.*;
 
 public abstract class IndexPage implements SelenideElement {
 
     @FindBy(css = ".fa-user")
-    String loginForm;
+    private SelenideElement loginForm;
 
-    /*private static SelenideElement loginForm = $(".fa-user");
-    private static SelenideElement usernameInput = $("#Login");
-    private static SelenideElement passwordInput = $("#Password");
-    private static SelenideElement loginButton = $(".fa-sign-in");
-    private static SelenideElement logoutButton = $(".fa-sign-out");
-    private static SelenideElement profileDropdown = $(".profile-photo");
-    private static SelenideElement titleOfMainTextOnIndexPage = $(".main-title");
-    private static SelenideElement mainTextOnIndexPage = $(".main-txt");
-    private static SelenideElement iconPracticeOnIndexPage = $(".icon-practise");
-    private static SelenideElement iconCustomOnIndexPage = $(".icon-custom");
-    private static SelenideElement iconMultiOnIndexPage = $(".icon-multi");
-    private static SelenideElement iconBaseOnIndexPage = $(".icon-base");
-    private static SelenideElement textPracticeOnIndexPage = $(By.xpath("//div[@class=\"col-sm-3\"][1]/div"));
-    private static SelenideElement textCustomOnIndexPage = $(By.xpath("//div[@class=\"col-sm-3\"][2]/div"));
-    private static SelenideElement textMultiOnIndexPage = $(By.xpath("//div[@class=\"col-sm-3\"][3]/div"));
-    private static SelenideElement textBaseOnIndexPage = $(By.xpath("//div[@class=\"col-sm-3\"][4]/div"));*/
+    @FindBy(css = "#Login")
+    private SelenideElement usernameField;
 
-    @AfterClass
-    public static void tearDown() {
+    @FindBy(css = "#Password")
+    private SelenideElement passwordField;
+
+    @FindBy(css = ".fa-sign-in")
+    private SelenideElement enterButton;
+
+    @FindBy(css = ".profile-photo span")
+    private SelenideElement profileUsername;
+
+    @FindBy(css = ".icon-practise")
+    private SelenideElement iconPractise;
+
+    @FindBy(css = ".icon-custom")
+    private SelenideElement iconCustom;
+
+    @FindBy(css = ".icon-multi")
+    private SelenideElement iconMulti;
+
+    @FindBy(css = ".icon-base")
+    private SelenideElement iconBase;
+
+    @FindBy(css = ".main-title")
+    private SelenideElement mainTitle;
+
+    @FindBy(css = ".main-txt")
+    private SelenideElement mainText;
+
+    @FindBy(css = ".benefit")
+    private ElementsCollection textsUnderPictures;
+
+    //Open test site by URL
+    public IndexPage() {
+        open(INDEX_PAGE_TITLE);
     }
 
-    @Test
-    public void openIndexPage() {
-        open("https://jdi-framework.github.io/tests/index.htm");
-        assertEquals(title(), INDEX_PAGE);
+    //Perform login
+    public void login(String username, String password) {
+        loginForm.click();
+        usernameField.sendKeys(username);
+        passwordField.sendKeys(password);
+        enterButton.click();
     }
 
-    @Test
-    public void login() {
-        $(loginForm).click();
-        /*usernameInput.sendKeys(USERNAME);
-        passwordInput.sendKeys(PASSWORD);
-        loginButton.click();
-        logoutButton.isDisplayed();
-        profileDropdown.shouldHave(text(LOGGED_USERNAME));*/
+    //check that user is logged in
+    public void checkUsernameVisibleAndEquals(String username) {
+        profileUsername.shouldBe(visible);
+        profileUsername.shouldHave(exactText(username));
     }
 
-    /*@Test
-    public static void indexPageElementsAreExist() {
-        titleOfMainTextOnIndexPage.exists();
-        mainTextOnIndexPage.exists();
-        iconPracticeOnIndexPage.exists();
-        iconCustomOnIndexPage.exists();
-        iconMultiOnIndexPage.exists();
-        iconBaseOnIndexPage.exists();
-        textPracticeOnIndexPage.exists();
-        textCustomOnIndexPage.exists();
-        textMultiOnIndexPage.exists();
-        textBaseOnIndexPage.exists();
-    }*/
+    //Check interface on Home page, it contains all expected elements.
+    public void checkInterface() {
+        checkPicsArePresent();
+        checkTextsUnderPics();
+        checkMainTexts();
+    }
+
+    //Check that 4 pictures are present
+    public void checkPicsArePresent() {
+        iconPractise.shouldBe(visible);
+        iconCustom.shouldBe(visible);
+        iconMulti.shouldBe(visible);
+        iconBase.shouldBe(visible);
+    }
+
+    //Check 4 texts under 4 pictures
+    public void checkTextsUnderPics() {
+        textsUnderPictures.shouldHave(exactTexts(BENEFIT_BASE, BENEFIT_CUSTOM, BENEFIT_MULTI, BENEFIT_PRACTICE));
+    }
+
+    //Check texts above pictures
+    public void checkMainTexts() {
+        mainTitle.shouldHave(exactText(INDEX_PAGE_MAIN_TITLE));
+        mainText.shouldHave(exactText(INDEX_PAGE_MAIN_TEXT));
+    }
 }
+

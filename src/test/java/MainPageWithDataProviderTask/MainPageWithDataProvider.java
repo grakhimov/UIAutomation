@@ -8,10 +8,11 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class MainPageWithDataProvider {
-    private ChromeDriver chromeDriver = new ChromeDriver();
+    private ChromeDriver chromeDriver;
 
     @BeforeClass
     public void setUp() {
+        chromeDriver = new ChromeDriver();
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
     }
 
@@ -22,7 +23,7 @@ public class MainPageWithDataProvider {
     }
 
     @Test(dataProvider = "procs")
-    public void getProcs(int position, String proc) {
+    public void getProcs(String proc) {
         //Open main page
         chromeDriver.navigate().to("https://jdi-framework.github.io/tests");
         chromeDriver.manage().window().maximize();
