@@ -3,9 +3,6 @@ package configs;
 public class Constans {
     public static final String INDEX_PAGE_URL = "https://jdi-framework.github.io/tests/index.htm";
     public static final String INDEX_PAGE_TITLE = "Index Page";
-    public static final String USERNAME = "epam";
-    public static final String PASSWORD = "1234";
-    public static final String LOGGED_USERNAME = "PITER CHAILOVSKII";
     public static final String INDEX_PAGE_MAIN_TITLE = "EPAM FRAMEWORK WISHES…";
     public static final String INDEX_PAGE_MAIN_TEXT = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
             "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud\n" +
