@@ -17,7 +17,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 import static configs.Constans.INDEX_PAGE_URL;
 
-public class SelenideTask extends SelenideExtension {
+public class VerifyMainAndDifferentElementsPages extends SelenideExtension {
     private IndexPage indexPage;
     private ServiceHeader serviceHeader;
     private ServiceLeftSection serviceLeftSection;

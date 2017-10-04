@@ -26,4 +26,10 @@ public class ServiceHeader {
         menuService.get(DIFFERENT_ELEMENTS.ordinal()).click();
         title().contains(DIFFERENT_ELEMENTS.text);
     }
+
+    public void openDatesPage() {
+        dropdownService.click();
+        menuService.get(DATES.ordinal()).click();
+        title().contains(DATES.text);
+    }
 }
