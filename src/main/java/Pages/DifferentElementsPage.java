@@ -6,6 +6,7 @@ import Constants.Radios;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import static Constants.Checkboxes.*;
 import static Constants.Radios.*;
@@ -48,6 +49,7 @@ public class DifferentElementsPage {
     @FindBy(css = "#mCSB_2")
     private SelenideElement rightSection;
 
+    @Step
     public void checkInterface() {
         colorDropdown.shouldBe(visible);
         defaultButton.shouldBe(visible);
@@ -76,27 +78,32 @@ public class DifferentElementsPage {
 
     }
 
+    @Step
     public void selectCheckbox(Checkboxes checkbox) {
         checkboxes.get(checkbox.ordinal()).click();
         checkboxes.get(checkbox.ordinal()).shouldBe(checked);
     }
 
+    @Step
     public void selectRadio(Radios radio) {
         radios.get(radio.ordinal()).click();
         radios.get(radio.ordinal()).shouldBe(checked);
     }
 
+    @Step
     public void selectInDropdown(DropdownValues dropdownValue) {
         colorDropdown.click();
         colorDropdownValues.get(dropdownValue.ordinal()).click();
         colorDropdown.shouldHave(text(dropdownValue.text));
     }
 
+    @Step
     public void checkLogs(String text, String condition) {
         ElementsCollection rowsInfoPanelLog = $$(".info-panel-body-log ul li");
         rowsInfoPanelLog.find(matchesText(text)).should(matchesText(condition));
     }
 
+    @Step
     public void uncheckCheckbox(Checkboxes checkbox) {
         if (checkboxes.get(checkbox.ordinal()).is(checked)) {
             checkboxes.get(checkbox.ordinal()).click();

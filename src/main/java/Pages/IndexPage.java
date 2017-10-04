@@ -4,6 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.codeborne.selenide.CollectionCondition.exactTexts;
 import static com.codeborne.selenide.Condition.exactText;
@@ -48,6 +49,7 @@ public class IndexPage {
     @FindBy(css = ".benefit-txt")
     private ElementsCollection textsUnderPictures;
 
+    @Step
     //Perform login
     public void login(String username, String password) {
         loginForm.click();
@@ -56,12 +58,14 @@ public class IndexPage {
         enterButton.click();
     }
 
+    @Step
     //check that user is logged in
     public void checkUsernameVisibleAndEquals(String username) {
         profileUsername.shouldBe(visible);
         profileUsername.shouldHave(exactText(username));
     }
 
+    @Step
     //Check interface on Home page, it contains all expected elements.
     public void checkInterface() {
         checkPageTitle();
@@ -70,6 +74,7 @@ public class IndexPage {
         checkMainTexts();
     }
 
+    @Step
     //Check that 4 pictures are present
     private void checkPicsArePresent() {
         iconPractise.shouldBe(visible);
@@ -78,11 +83,13 @@ public class IndexPage {
         iconBase.shouldBe(visible);
     }
 
+    @Step
     //Check 4 texts under 4 pictures
     private void checkTextsUnderPics() {
         textsUnderPictures.shouldHave(exactTexts(BENEFIT_PRACTICE, BENEFIT_CUSTOM, BENEFIT_MULTI, BENEFIT_BASE));
     }
 
+    @Step
     //Check texts above pictures
     private void checkMainTexts() {
         mainTitle.shouldHave(exactText(INDEX_PAGE_MAIN_TITLE));
@@ -91,6 +98,7 @@ public class IndexPage {
 
     //Check page title
 
+    @Step
     private void checkPageTitle() {
         Selenide.title().contains(INDEX_PAGE_TITLE);
     }

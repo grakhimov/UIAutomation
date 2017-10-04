@@ -3,6 +3,7 @@ package Pages;
 import Constants.XPositionChange;
 import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import static Constants.Sliders.LEFT;
 import static Constants.Sliders.RIGHT;
@@ -13,6 +14,7 @@ public class Dates {
     @FindBy(css = ".ui-slider-handle")
     private ElementsCollection sliders;
 
+    @Step
     public void moveLeftSliderAndCheckValue(XPositionChange newPosition) {
         actions().clickAndHold(sliders.get(LEFT.slider))
                 .moveByOffset(newPosition.xPositionChange, 0)
@@ -23,6 +25,7 @@ public class Dates {
 
     }
 
+    @Step
     public void moveRightSliderAndCheckValue(XPositionChange newPosition) {
         actions().clickAndHold(sliders.get(RIGHT.slider))
                 .moveByOffset(newPosition.xPositionChange, 0)
